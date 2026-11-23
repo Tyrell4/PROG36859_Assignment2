@@ -1,6 +1,6 @@
 {
-    "videogame_csv" : "./Files/videogame_csv",
-    "movie_csv" : "./Files/movie_csv",
-    "videogame_json" : "./Files/videogame_json",
-    "movie_json" : "./Files/movie_json"
+    "videogame_csv" : "./Files/videogame_csv.csv",
+    "movie_csv" : "./Files/movie_csv.csv",
+    "videogame_json" : "./Files/videogame_json.json",
+    "movie_json" : "./Files/movie_json.json"
 }

@@ -7,11 +7,33 @@ November 29, 2026
 William Barry
 '''
 
+import json
+import csv
+from dataclasses import dataclass, asdict
 
+def LoadSettings():
+    #Load the settings file and return it as a dictionary, or None on failure.
+    try:
+        with open("./settings.json", "r") as file:
+            settings = json.load(file)
+    except FileNotFoundError:
+        print(f"Error: settings.json file was not found.")
+        return None
+    except json.JSONDecodeError as e:
+        print(f"Error: settings.json is not valid JSON file. {e}")
+        return None
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+    
+    return settings
+        
 
 def main():
     pass
 
+if __name__ == "__main__":
+    main()
 #with open("./Files/monsters.csv", "r") as file:
 
 
@@ -28,7 +50,7 @@ CSV File Reading
     Video Game header: id,name,qty,price,release_date
 
 JSON File Writing
-4. Using data loaded from CSV, write eac hcollection of games and movies to their respectiev JSON file from the settings
+4. Using data loaded from CSV, write each collection of games and movies to their respectiev JSON file from the settings
 
 Verification
 5. Program will load each JSON file and compare the items from the csv to the ones from the JSON file. If an item doesn't
