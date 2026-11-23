@@ -10,6 +10,7 @@ William Barry
 import json
 import csv
 from dataclasses import dataclass, asdict
+from datetime import date
 
 def LoadSettings():
     #Load the settings file and return it as a dictionary, or None on failure.
@@ -26,8 +27,43 @@ def LoadSettings():
         print(f"Error: {e}")
         return None
     
+    if not isinstance(settings, dict):
+        print(f"Error: settings.json doesn't have proper dictionary/json format.")
+        return None
+    
     return settings
-        
+
+@dataclass
+class Movie:
+    id: int
+    title: str
+    genre: str
+    qty: int
+    price: float
+    release_date: date
+    
+    def __post_init__(self):
+        if self.qty < 0:
+            raise ValueError("Quantity can't be negative")
+        if self.price < 0:
+            raise ValueError("Price can't be negative")
+
+@dataclass
+class VideoGame:
+    id: int
+    name: str
+    qty: int
+    price: float
+    release_date: date
+    
+    def __post_init__(self):
+        if self.qty < 0:
+            raise ValueError("Quantity can't be negative")
+        if self.price < 0:
+            raise ValueError("Price can't be negative")
+
+def LoadCSV():
+    pass        
 
 def main():
     pass
