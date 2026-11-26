@@ -1,0 +1,42 @@
+[
+    {
+        "id": 101,
+        "title": "I Am Number Four",
+        "genre": "Sci-Fi",
+        "qty": 13,
+        "price": 9.79,
+        "release_date": "2011-02-11"
+    },
+    {
+        "id": 102,
+        "title": "Jumper",
+        "genre": "Sci-Fi",
+        "qty": 4,
+        "price": 12.99,
+        "release_date": "2008-02-14"
+    },
+    {
+        "id": 103,
+        "title": "Chronicle",
+        "genre": "Sci-Fi",
+        "qty": 9,
+        "price": 14.0,
+        "release_date": "2012-02-03"
+    },
+    {
+        "id": 104,
+        "title": "Project Almanac",
+        "genre": "Sci-Fi",
+        "qty": 24,
+        "price": 22.99,
+        "release_date": "2015-01-30"
+    },
+    {
+        "id": 105,
+        "title": "Your Name",
+        "genre": "Anime",
+        "qty": 0,
+        "price": 27.49,
+        "release_date": "2017-04-07"
+    }
+]

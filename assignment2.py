@@ -10,10 +10,9 @@ William Barry
 import json
 import csv
 from dataclasses import dataclass, asdict
-from datetime import date
 
 def LoadSettings():
-    #Load the settings file and return it as a dictionary, or None on failure.
+    #Load the settings file and return it as a dictionary, or None.
     try:
         with open("./settings.json", "r") as file:
             settings = json.load(file)
@@ -40,7 +39,7 @@ class Movie:
     genre: str
     qty: int
     price: float
-    release_date: date
+    release_date: str
     
     def __post_init__(self):
         if self.qty < 0:
@@ -54,7 +53,7 @@ class VideoGame:
     name: str
     qty: int
     price: float
-    release_date: date
+    release_date: str
     
     def __post_init__(self):
         if self.qty < 0:
@@ -62,11 +61,109 @@ class VideoGame:
         if self.price < 0:
             raise ValueError("Price can't be negative")
 
-def LoadCSV():
-    pass        
+
+def LoadMovieCSV(filepath):
+    movies = []
+    
+    #Do try catch here
+    with open(filepath) as file:
+        dict_reader = csv.DictReader(file, delimiter=',')
+        for record in dict_reader:
+            if record.get("id") not in movies:
+                movies.append(Movie(int(record.get("id")), record.get("title"), record.get("genre"), int(record.get("qty")), 
+                                                 float(record.get("price")), record.get("release_date")))
+
+    # print(movies)
+    return movies  
+    
+def LoadVideoGameCSV(filepath):
+    videogames = [] 
+    
+    #Do try catch here
+    with open(filepath) as file:
+        dict_reader = csv.DictReader(file, delimiter=',')
+        for record in dict_reader:
+            if record.get("id") not in videogames:
+                videogames.append(VideoGame(int(record.get("id")), record.get("name"), int(record.get("qty")), 
+                                                    float(record.get("price")), record.get("release_date")))
+   
+    print(videogames)      
+    return videogames
+    
+# def WriteMovieJSON(movies, filepath):
+#     #Try catch
+#     with open(filepath, "w") as file :
+#         for movie in movies:
+#             json_data = asdict(movie)
+#             json.dump(json_data, file, indent=4)
+
+# def WriteVideoGameJSON(videogames, filepath):
+#     #Try catch
+#     with open(filepath, "w") as file :
+#         for game in videogames:
+#             json_data = asdict(game)
+#             json.dump(json_data, file, indent=4)
+            
+    
+def WriteJSON(collection, filepath):
+    #Try catch
+    json_data = [asdict(item) for item in collection]
+    with open(filepath, "w") as file :
+        json.dump(json_data, file, indent=4)
+
+#JSON will be a list of JSON objects (dictionaries) which will look like
+'''
+[
+    {
+        
+    },
+    {
+        
+    }
+]
+
+'''
+
+'''
+
+# Save a monster by using the dataclass asdict to make a dict which json can save as a string
+print("\n----------- Save a monster by using the dataclass asdict to make a dict which json can save as a string -----------")
+with open("./Files/monster_from_obj.json", "w") as file :
+    json_data = asdict(single_monster_obj)
+    json.dump(json_data, file, indent=4)
+    pass
+    
+# Load a monster by using the json string and the **kwards (keyword arguments)
+print("\n----------- Load a monster by using the json string and the **kwards (keyword arguments) with a dataclass -----------")
+with open("./Files/monster_from_obj.json", "r") as file :
+    json_data = json.load(file)
+    m = Monster(**json_data)
+    print(m)
+    pass
+    
+    
+    
+    
+'''
+
+      
+
 
 def main():
-    pass
+    settings = LoadSettings()
+    
+    if settings is None:
+        return
+    
+    movies = LoadMovieCSV(settings["movie_csv"])
+    videogames = LoadVideoGameCSV(settings["videogame_csv"])
+    
+    
+    WriteJSON(movies, settings["movie_json"])
+    WriteJSON(videogames, settings["videogame_json"])
+    
+    #Menu options for Save JSON Data, Verify, Quit
+    
 
 if __name__ == "__main__":
     main()
@@ -86,11 +183,12 @@ CSV File Reading
     Video Game header: id,name,qty,price,release_date
 
 JSON File Writing
-4. Using data loaded from CSV, write each collection of games and movies to their respectiev JSON file from the settings
+4. Using data loaded from CSV, write each collection of games and movies to their respective JSON file from the settings
 
 Verification
 5. Program will load each JSON file and compare the items from the csv to the ones from the JSON file. If an item doesn't
-    exist in the JSON file, report it to the user
+    exist in the JSON file, report it to the user. Test by loading all and then deleting ana item from the JSON and them compare again.
+    Then it will say what was missing
     
 6. Main Application Flow
     · Load Settings and CSV Data

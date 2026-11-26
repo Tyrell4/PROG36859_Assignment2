@@ -1,0 +1,37 @@
+[
+    {
+        "id": 101,
+        "name": "Fusion Frenzy",
+        "qty": 1,
+        "price": 24.99,
+        "release_date": "2001-11-15"
+    },
+    {
+        "id": 102,
+        "name": "Black Ops 2",
+        "qty": 11,
+        "price": 41.99,
+        "release_date": "2013-11-13"
+    },
+    {
+        "id": 103,
+        "name": "Black Ops 3",
+        "qty": 0,
+        "price": 49.99,
+        "release_date": "2015-11-06"
+    },
+    {
+        "id": 104,
+        "name": "Marble Madness",
+        "qty": 24,
+        "price": 12.99,
+        "release_date": "1984-12-18"
+    },
+    {
+        "id": 105,
+        "name": "Virtua Fighter",
+        "qty": 19,
+        "price": 9.49,
+        "release_date": "1993-12-06"
+    }
+]
